@@ -1,0 +1,17 @@
+<%= form_for @flight do |f| %>
+
+    <%= f.label :departing_airports_id, "Origin" %>
+    <%= f.select(:departing_airport_id, @departing_airport_options) %>
+
+    <%= f.label :arriving_airports_id, "Destination" %>
+    <%= f.select(:arriving_airport_id, @arriving_airport_options) %>
+
+    <br/>
+
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+
+    <%= f.label :num_passengers, "Travelers" %>
+    <%= f.select(:num_passengers, @num_options) %>
+
+<% end %>
