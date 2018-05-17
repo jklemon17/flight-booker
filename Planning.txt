@@ -1,0 +1,37 @@
+Models
+
+Airports
+id
+abbr
+#name
+#city
+#country
+
+has_many :departing_flights
+has_many :arriving_flights
+
+Flights
+id
+departure_time: dateTime
+arrival_time: dateTime
+price
+
+belong_to :departing_airport
+belong_to :arriving_airport
+has_many :booking
+has_many :passengers, through: :bookings
+
+Passengers
+id
+first_name
+last_name
+email
+has_many :bookings
+has_many :flights, through: :bookings
+
+Bookings
+id
+passenger_id
+flight_id
+belongs_to :passenger
+belongs_to :flight
