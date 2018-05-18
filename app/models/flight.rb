@@ -4,4 +4,6 @@ class Flight < ApplicationRecord
   has_many :bookings
   # has_many :passengers, through: :bookings
   accepts_nested_attributes_for :bookings
+
+  default_scope -> { order(departure_time: :asc) }
 end
