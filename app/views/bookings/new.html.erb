@@ -15,8 +15,8 @@
       Total Price: $<%= @flight.price %> x <%= @passenger_count %> = $<%= @flight.price * @passenger_count %>
       <br/>
 
-      <% @passenger_count.times do |i| %>
-        <%= f.fields_for @booking.passengers.build do |p_form| %>
+      <% @passengers.each_with_index do |passenger, i| %>
+        <%= f.fields_for :passengers, passenger do |p_form| %>
           <%= p_form.label :first_name, "First Name for passenger #{i+1}" %>
           <%= p_form.text_field :first_name %>
         <% end %>
