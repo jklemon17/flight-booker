@@ -24,9 +24,9 @@
 
 <h2 style="text-align:center"> Matching Flights </h2>
 
-<h3 style="text-align:center"> Select your departure to <%= @flights.first.arriving_airport.abbreviation %> on <%= @flights.first.date.strftime('%e-%b-%Y') %> </h3>
 
 <% if @flights.count > 0 %>
+    <h3 style="text-align:center"> Select your departure to <%= @flights.first.arriving_airport.abbreviation %> on <%= @flights.first.date.strftime('%e-%b-%Y') %> </h3>
 
       <h3 class="headers" style="text-align:center">
         <span class="head-d-time">Departure Time</span>
@@ -37,8 +37,7 @@
       </h3>
 
       <% @flights.each do |flight| %>
-        <%= link_to "Add to cart", {:controller => "car", :action => "add_to_cart", :car => car.id }%>
-        <%= link_to(/booking/new, { flight_id: flight.id, passenger_count } do %>
+        <%= link_to("/bookings/new?flight_id=#{flight.id}&passenger_count=#{@passenger_count}") do %>
             <h4 class="results" style="text-align:center">
                 <span class="result-d-time"><%= flight.departure_time.strftime('%k:%M') %></span>
                 <span class="result-depart"><%= flight.departing_airport.abbreviation %></span>

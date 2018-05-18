@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'flights#index'
   get 'flights', to: 'flights#index'
-  get 'bookings/new'
-  get 'bookings/show'
+
+  resource :bookings, only: [ :new, :show ]
+  # get 'bookings/new'
+  # get 'bookings/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
