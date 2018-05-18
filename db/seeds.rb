@@ -22,12 +22,12 @@ end
 # end
 
 
-# for the next 1000 days
+# for the next 365 days
 date = Date.today
-30.times do
+365.times do
 
     # 100 flights per day
-    50.times do
+    100.times do
 
         # NOTE convert to time in hours
 
@@ -41,11 +41,10 @@ date = Date.today
 
         # NOTE times must be converted to time of day along with the date for each 1000 days.
 
-        # departing_airport = rand(1..22)
-        departing_airport = rand(1..5)
-        arriving_airport = rand(1..5)
+        departing_airport = rand(1..22)
+        arriving_airport = rand(1..22)
         while arriving_airport == departing_airport do
-          arriving_airport = rand(1..5)
+          arriving_airport = rand(1..22)
         end
 
         # price = rand(50..1000)
