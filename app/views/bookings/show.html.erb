@@ -1,2 +1,39 @@
-<h1>Bookings#show</h1>
-<p>Find me in app/views/bookings/show.html.erb</p>
+<h1>Your booking has been completed!</h1>
+<h2>Here is your confirmation number: <%= rand(1234..9999)%></h2>
+
+
+<h1 style="text-align:center">Flight #<%= @flight.id %> for <%= pluralize(@passenger_count, "passenger") %>.</h1>
+
+<%= @booking.passengers.each_with_index do |passenger, index|  %>
+  Passenger <%= "#{index+1}" %>: <%= passenger.first_name %>
+<% end %>
+
+<div style="text-align:center">
+      <h2> Flight Information: </h2>
+      <ul style="list-style:none;">
+          <li> Flight Date: <%= @booking.flight.date.strftime('%e-%b-%Y') %></li>
+          <li> Departure Time: <%= @booking.flight.departure_time.strftime('%k:%M') %></li>
+          <li> Departing from: <%= @booking.flight.departing_airport.abbreviation %></li>
+          <li> Arrival Time: <%= @booking.flight.arrival_time.strftime('%k:%M') %></li>
+          <li> Destination: <%= @booking.flight.arriving_airport.abbreviation %></li>
+          <li> Price per passenger:<%= @booking.flight.price %></li>
+      </ul>
+
+      Total Price: $<%= @booking.flight.price %> x <%= @booking.passenger_count %> = $<%= @booking.flight.price * @booking.passenger_count %>
+      <br/>
+
+      <!-- <% @passenger_count.times do |i| %>
+        <%= f.fields_for @booking.passengers.build do |p_form| %>
+          <%= p_form.label :first_name, "First Name for passenger #{i+1}" %>
+          <%= p_form.text_field :first_name %>
+        <% end %>
+        <br/>
+      <% end %>
+      <br/>
+
+      <%= f.hidden_field(:flight_id, value: @flight.id) %>
+      <%= f.hidden_field(:passenger_count, value: @passenger_count) %>
+
+      <%= f.submit "Book Flight" %> -->
+
+</div>

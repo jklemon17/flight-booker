@@ -1,8 +1,8 @@
-Booking flight #<%= @flight.id %> for <%= @passenger_count %> passengers.
+<h1 style="text-align:center">Booking flight #<%= @flight.id %> for <%= pluralize(@passenger_count, "passenger") %>.</h1>
 
 <div style="text-align:center">
     <%= form_for @booking do |f| %>
-      Flight Information:
+      <h2> Flight Information: </h2>
       <ul style="list-style:none;">
           <li> Flight Date: <%= @flight.date.strftime('%e-%b-%Y') %></li>
           <li> Departure Time: <%= @flight.departure_time.strftime('%k:%M') %></li>
@@ -23,6 +23,9 @@ Booking flight #<%= @flight.id %> for <%= @passenger_count %> passengers.
         <br/>
       <% end %>
       <br/>
+
+      <%= f.hidden_field(:flight_id, value: @flight.id) %>
+      <%= f.hidden_field(:passenger_count, value: @passenger_count) %>
 
       <%= f.submit "Book Flight" %>
 
