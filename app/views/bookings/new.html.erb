@@ -1,1 +1,30 @@
-Booking flight #<%= @flight_id %> for <%= @passenger_count %> passengers.
+Booking flight #<%= @flight.id %> for <%= @passenger_count %> passengers.
+
+<div style="text-align:center">
+    <%= form_for @booking do |f| %>
+      Flight Information:
+      <ul style="list-style:none;">
+          <li> Flight Date: <%= @flight.date.strftime('%e-%b-%Y') %></li>
+          <li> Departure Time: <%= @flight.departure_time.strftime('%k:%M') %></li>
+          <li> Departing from: <%= @flight.departing_airport.abbreviation %></li>
+          <li> Arrival Time: <%= @flight.arrival_time.strftime('%k:%M') %></li>
+          <li> Destination: <%= @flight.arriving_airport.abbreviation %></li>
+          <li> Price per passenger:<%= @flight.price %></li>
+      </ul>
+
+      Total Price: $<%= @flight.price %> x <%= @passenger_count %> = $<%= @flight.price * @passenger_count %>
+      <br/>
+
+      <% @passenger_count.times do |i| %>
+        <%= f.fields_for @booking.passengers.build do |p_form| %>
+          <%= p_form.label :first_name, "First Name for passenger #{i+1}" %>
+          <%= p_form.text_field :first_name %>
+        <% end %>
+        <br/>
+      <% end %>
+      <br/>
+
+      <%= f.submit "Book Flight" %>
+
+    <% end %>
+</div>
