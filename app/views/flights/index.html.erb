@@ -1,17 +1,35 @@
-<%= form_for @flight do |f| %>
+<%= form_for @flight, method: 'get' do |f| %>
 
-    <%= f.label :departing_airports_id, "Origin" %>
-    <%= f.select(:departing_airport_id, @departing_airport_options) %>
+  <%= f.label :departing_airports_id, "Origin" %>
+  <%= f.select(:departing_airport_id, @departing_airport_options) %>
 
-    <%= f.label :arriving_airports_id, "Destination" %>
-    <%= f.select(:arriving_airport_id, @arriving_airport_options) %>
+  <%= f.label :arriving_airports_id, "Destination" %>
+  <%= f.select(:arriving_airport_id, @arriving_airport_options) %>
 
-    <br/>
+  <br/>
 
-    <%= f.label :date %>
-    <%= f.date_field :date %>
+  <%= f.label :date %>
+  <%= f.date_field :date %>
 
-    <%= f.label :num_passengers, "Travelers" %>
-    <%= f.select(:num_passengers, @num_options) %>
+  <%= f.fields_for @flight.bookings.build do |b| %>
+    <%= b.label :passenger_count, "Travelers" %>
+    <%= b.select(:passenger_count, @num_options) %>
+  <% end %>
 
+  <%= f.submit "Search" %>
+
+<% end %>
+
+<h2> Matching Flights </h2>
+
+<% if @flights.count > 0 %>
+  <% @flights.each do |flight| %>
+    <ul>
+      <li>Origin: <%= flight.departing_airport.abbreviation %></li>
+      <li>Departure Time: <%= flight.departure_time %></li>
+      <li>Destination: <%= flight.arriving_airport.abbreviation %></li>
+      <li>Arrival Time: <%= flight.arrival_time %></li>
+      <li>Price: $<%= flight.price %></li>
+    </ul>
+  <% end %>
 <% end %>

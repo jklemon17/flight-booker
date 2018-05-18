@@ -23,34 +23,38 @@ end
 
 
 # for the next 1000 days
-date = Date.today()
-1000.times do
+date = Date.today
+30.times do
 
     # 100 flights per day
-    100.times do
+    10.times do
 
         # NOTE convert to time in hours
 
-        departure_time = rand(6..18) # flights run from 6am to 6pm
+        # departure_time = rand(6..18) # flights run from 6am to 6pm
+        depart = Time.new(date.year, date.month, date.day, rand(6..18), rand(0..3)*15)
+
         flight_duration = rand(45..300) # minutes, 5 hours maximum
-        arrival_time = departure_time + flight_duration
+
+        arrive = depart + flight_duration * 60
+
 
         # NOTE times must be converted to time of day along with the date for each 1000 days.
 
         departing_airport = rand(1..22)
         arriving_airport = rand(1..22)
-        while arrival == departure do
-          arrival = rand(1..22)
+        while arriving_airport == departing_airport do
+          arriving_airport = rand(1..22)
         end
 
-        price = rand(50..1000)
+        # price = rand(50..1000)
 
-        Flight.create(departure_time: datetime,
-                      arrival_time: datetime,
+        Flight.create(departure_time: depart,
+                      arrival_time: arrive,
                       departing_airport_id: departing_airport,
                       arriving_airport_id: arriving_airport,
-                      price: )
-
+                      price: rand(50..1000),
+                      date: date)
     end
 
     date += 1
