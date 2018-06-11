@@ -22,12 +22,12 @@ end
 # end
 
 
-# for the next 1000 days
+# for the next 365 days
 date = Date.today
-30.times do
+365.times do
 
     # 100 flights per day
-    10.times do
+    100.times do
 
         # NOTE convert to time in hours
 

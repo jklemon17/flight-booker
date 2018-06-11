@@ -1,35 +1,51 @@
-<%= form_for @flight, method: 'get' do |f| %>
+<div style="text-align:center">
+    <%= form_for @flight, method: 'get' do |f| %>
 
-  <%= f.label :departing_airports_id, "Origin" %>
-  <%= f.select(:departing_airport_id, @departing_airport_options) %>
+      <%= f.label :departing_airports_id, "Origin" %>
+      <%= f.select(:departing_airport_id, @departing_airport_options) %>
 
-  <%= f.label :arriving_airports_id, "Destination" %>
-  <%= f.select(:arriving_airport_id, @arriving_airport_options) %>
+      <%= f.label :arriving_airports_id, "Destination" %>
+      <%= f.select(:arriving_airport_id, @arriving_airport_options) %>
 
-  <br/>
+      <br/>
 
-  <%= f.label :date %>
-  <%= f.date_field :date %>
+      <%= f.label :date %>
+      <%= f.date_field :date %>
 
-  <%= f.fields_for @flight.bookings.build do |b| %>
-    <%= b.label :passenger_count, "Travelers" %>
-    <%= b.select(:passenger_count, @num_options) %>
-  <% end %>
+      <%= f.fields_for @flight.bookings.build do |b| %>
+        <%= b.label :passenger_count, "Travelers" %>
+        <%= b.select(:passenger_count, @num_options) %>
+      <% end %>
 
-  <%= f.submit "Search" %>
+      <%= f.submit "Search" %>
 
-<% end %>
+    <% end %>
+</div>
 
-<h2> Matching Flights </h2>
+<h2 style="text-align:center"> Matching Flights </h2>
+
 
 <% if @flights.count > 0 %>
-  <% @flights.each do |flight| %>
-    <ul>
-      <li>Origin: <%= flight.departing_airport.abbreviation %></li>
-      <li>Departure Time: <%= flight.departure_time %></li>
-      <li>Destination: <%= flight.arriving_airport.abbreviation %></li>
-      <li>Arrival Time: <%= flight.arrival_time %></li>
-      <li>Price: $<%= flight.price %></li>
-    </ul>
-  <% end %>
+    <h3 style="text-align:center"> Select your departure to <%= @flights.first.arriving_airport.abbreviation %> on <%= @flights.first.date.strftime('%e-%b-%Y') %> </h3>
+
+      <h3 class="headers" style="text-align:center">
+        <span class="head-d-time">Departure Time</span>
+        <span class="head-origin">Origin</span>
+        <span class="head-a-time">Arrival Time</span>
+        <span class="head-destination">Destination</span>
+        <span class="head-price">Price</span>
+      </h3>
+
+      <% @flights.each do |flight| %>
+        <%= link_to("/bookings/new?flight_id=#{flight.id}&passenger_count=#{@passenger_count}") do %>
+            <h4 class="results" style="text-align:center">
+                <span class="result-d-time"><%= flight.departure_time.strftime('%k:%M') %></span>
+                <span class="result-depart"><%= flight.departing_airport.abbreviation %></span>
+                <span class="result-a-time"><%= flight.arrival_time.strftime('%k:%M') %></span>
+                <span class="result-arrive"><%= flight.arriving_airport.abbreviation %></span>
+                <span class="result-price">$<%= flight.price %></span>
+            </h4>
+        <% end %>
+      <% end %>
+
 <% end %>
