@@ -2,9 +2,6 @@
 
 # Flight Booker - Ruby on Rails application to practice user authentication and authorization
 
-This is for The Odin Project - Rails Course:
-[*Flight Booker*](https://www.theodinproject.com/courses/ruby-on-rails/lessons/building-advanced-forms).
-
 ## Getting started
 
 
@@ -56,3 +53,8 @@ Then run:
 ```
 $ rspec
 ```
+
+## Authors
+
+* **Kyle Lemon** - [jklemon17](https://github.com/jklemon17)
+* **Paul Rail** - [PolarisTLX](https://github.com/PolarisTLX) 
